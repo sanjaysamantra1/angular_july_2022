@@ -1,0 +1,227 @@
+HTML - content of a webpage
+CSS - for styling
+Bootstrap - Responsiveness + pre-defined components-table,carousel,modal,card
+Javascript - behaviour of a webpage
+
+
+Javascript
+==========
+-dynamically typed , Synchronous & single-threaded Language.
+-dynamically typed means the types are checked, and datatype mismatches are spotted only at the runtime.
+-JavaScript engine executes code from top to bottom, line by line.In other words, it is synchronous.
+-JavaScript engine has only one 'call-stack' so that it only can do one thing at a time.
+
+-A JavaScript engine is a program or an interpreter which executes JavaScript code. 
+  
+
+javascript Engines:
+	V8  - is developed by Google , Google Chrome.
+	SpiderMonkey - is developed by Mozilla , Firefox.
+	JavaScriptCore  - is Apple's engine for its Safari browser. 
+	Chakra  - is the JavaScript engine of the Internet Explorer browser.
+
+
+
+
+Types
+------
+1. internal
+	a. head or body
+	b. <script></script>
+	c. page level javascript
+	
+2. external
+	a. head or body
+	b. separate js file(needs to be included to html)
+		<script src='abc.js'></script>
+	c. Application level/project level
+
+	
+Q. What is the best place to include js files? head/body?
+   
+
+
+Eliminate Render-Blocking JavaScript
+====================================
+-With HTML5, we got two new boolean attributes for the <script> tag : async and defer.
+ ex:- <script src='demo.js' async/defer></script>
+-async/defer attribute should only be used on external scripts, not with internal scripts.
+-These attributes only make sense while using the script in the head portion of the page.
+-A good strategy is to use async when possible, and then defer when async isn’t an option.
+-With async, the file gets downloaded asynchronously and then executed as soon as it’s downloaded.
+-With defer, the file gets downloaded asynchronously, but executed only when the document parsing is completed.
+-With defer, scripts will execute in the same order as they are called. 
+ defer is useful when a script depends on another script.
+ https://flaviocopes.com/javascript-async-defer/
+ 
+
+Javascript - is a programming language, follows ECMASCRIPT Standards.
+ECMA - European Computer Manufacturers Association.
+ECMASCRIPT -  is a standard for the scripting languages.
+
+
+
+	Javascript					 TypeScript
+---------------------------------------------------------
+1.strongly typed-No				1.strongly typed-yes
+2.directly run on browser		2.not directly run on the browser
+3.interface-No					3.interface - Yes
+4.optional parameters-No		4.optional parameters-yes
+5.interpreted language			5.compiles the code
+6.errors at runtime				6.errors during the development time
+7.generics-no					7.generics-yes
+
+
+
+	
+datatypes:
+=========
+-Types of data we are dealing with.
+-JavaScript provides different data types to hold different types of values.
+-two types of data types : 
+	1.primitive  	(number,string,boolean,undefined,null,symbol,bigInt)
+	2.Non-primitive (object references - Object)
+-difference between primitives and non-primitives is that primitives are immutable and 
+ non-primitives are mutable.
+	var str = 'This is a string.';
+	str[1] = 'H'
+	console.log(str); // 'This is a string.'
+-Mutable values are those which can be modified after creation.
+-Immutable values are those which cannot be modified after creation.
+-primitives are compared by values whereas non-primitives are compared by references.
+-primitive value will always be exactly equal to another primitive with an equivalent value.
+    const first = "abc" + "def";
+	const second = "ab" + "cd" + "ef";
+	console.log(first === second); // true
+-equivalent non-primitive values will not result in values which are exactly equal.
+    const obj1 = { name: "sanjay" };
+	const obj2 = { name: "sanjay" };
+	console.log(obj1 === obj2); // false
+-'typeof' is used to check datatype of a value.
+
+
+  Primitive							Non-primitive/Complex
+  --------------					-------------------------
+  1. number								1. function
+  2. string								2. Object ( {} ,[] )
+  3. boolean(true,false)
+  4. undefined(undefined)
+  5. null
+  6. symbol(ES-6)
+  7. bigint (const x = 2n ** 53n;)
+     appending n to the end of an integer literal
+
+  
+	 
+null vs undefined
+------------------
+-undefined means "not initialized".it means a variable is declared but not initialized yet.
+-null means "the intentional absence of any object value". null is an assigned value. It means nothing.
+-A variable initialized with undefined means that the variable has no value or object assigned to it 
+ while null means that the variable has been set to an object whose value is undefined.
+-Both null and undefined are falsy values.
+-The JSON data format does not support undefined, supports only null;
+-JSON.stringify({a: undefined, b: null}) -->{"b":null}
+-even though typeof null === 'object', null is a still primitive value. 
+	ex: null == null;   //true
+
+
+1. when a variable is declared without a value, that variable by default will have undefined value 
+   a variable can be declared with a null value.
+	var a; 			//a=undefined
+	var b = null;  //b=null
+	
+2. typeof undefined; // undefined
+   typeof null; //object
+
+
+
+ var a = {}
+ var b = [] 
+ typeof a; //object
+ typeof b; //object
+ 
+ a instanceof Object; //true
+ b instanceof Object; //true
+ 
+ a instanceof Array; //false
+ b instanceof Array; //true
+ 
+ Array.isArray(a); //false
+ Array.isArray(b); //true
+
+
+Symbol 
+======
+-A 'symbol' represents a unique identifier.
+-Symbols are often used to add unique property keys to an object that won’t collide with keys.
+-create a symbol by calling the Symbol(), not by using new keyword.
+ let sym1 = Symbol()  // correct
+ let sym2 = new Symbol()  // TypeError
+-Even if we create many symbols with the same description, they are different values.
+ Symbol('foo') === Symbol('foo')  // false
+-Symbols allow us to create “hidden” properties of an object, 
+ that no other part of code can accidentally access or overwrite.
+-If we want to use a symbol in an object literal,we need square brackets around it.
+ let id = Symbol("id");
+ let user = {name:'sanjay',[id]:123}
+-Symbols are not enumerated,Symbols are skipped by for…in while we iterate object properties.
+-Symbols are not part of the Object.keys() or Object.getOwnPropertyNames()
+-Symbols assigned to an object can be accessed using the Object.getOwnPropertySymbols() method
+-Object.assign() copies both string and symbol properties.
+
+
+ 
+ 
+Type coercion/Type casting
+==========================
+-Type coercion is the automatic or implicit conversion of values from one data type to another 
+ (such as strings to numbers). 
+-Type conversion is similar to type coercion because they both convert values from one data type to 
+ another with one key difference 
+-type coercion is implicit whereas type conversion can be either implicit or explicit.
+
+Rules:
+-Primitives are coerced to boolean when using logical operators.
+	123 && "hello"    hello
+-Primitives are coerced to string when using the binary + operator — 
+  if any operand is a string
+-Primitives are coerced to number when using comparison operators.
+	"5" >= 1   true
+-Primitives are coerced to number when using arithmetic operators (except for + when one operand is a string)
+	"5" - 1    4
+	"5" * 3    15
+-Primitives are coerced to number when using the unary + operator
+	+'123'   123
+	+true	 1
+	+null	 0
+	
+	
+ 
+ 
+ 
+Most Used methods in JS
+=======================
+window.alert()  -  window(Object), alert(function)
+document.write() - document(object), write(function)
+console.log()   -  console(object), log(function)
+
+window - alert(),confirm(),prompt(),setTimeout(),setInterval(),print(),open()
+document - write(),writeln(),getElementById(),querySelector()
+console - log(),error(),warn(),table(),dir(),trace(),count(),time()
+
+ 
+N.p - while calling window object functions it is not necessary to call with object name;	
+	window.alert();  // correct
+	alert(); 		 // correct
+	this.alert();    // correct
+	
+	console.log() // Yes
+	log() // No
+	
+	document.write(); //yes
+	write(); //No
+	
+Note:- all window Object functions can be directly called.
+       default value of 'this' is 'window'
+ 
